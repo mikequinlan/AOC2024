@@ -1,19 +1,15 @@
-﻿namespace AOC;
+namespace AOC;
 
-internal enum ItemType { Lock, Key }
-
-internal abstract class Item(ItemType itemType, IReadOnlyList<int> heights)
+internal abstract class Item(IReadOnlyList<int> heights)
 {
-    public ItemType ItemType => itemType;
     public IReadOnlyList<int> Heights => heights;
 
-    public bool Fits(Item item) 
-        => !heights.Where((_, i) => Heights[i] + item.Heights[i] > heights.Count).Any();
+    public bool Fits(Item item) => !heights.Where((_, i) => Heights[i] + item.Heights[i] > heights.Count).Any();
 }
 
-internal class KeyItem(IReadOnlyList<int> heights) : Item(ItemType.Key, heights);
+internal class KeyItem(IReadOnlyList<int> heights) : Item(heights);
 
-internal class LockItem(IReadOnlyList<int> heights) : Item(ItemType.Lock, heights);
+internal class LockItem(IReadOnlyList<int> heights) : Item(heights);
 
 internal static class Program
 {
